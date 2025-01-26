@@ -34,6 +34,8 @@ function App() {
       <Routes>
         {isAuth? 
         <>
+         <Route path="payment/sucess/:id" element={<PaymentSucess/>} />
+         <Route path="payment/failed" element={<PaymentFailed/>} />
          <Route path="/profile" element={<Profile/>} />
          <Route path="/logout" element={<Navigate to="/login" />} />
         </>
@@ -42,9 +44,7 @@ function App() {
         }
 
 
-        
-        <Route path="payment/sucess/:id" element={<PaymentSucess/>} />
-        <Route path="payment/failed" element={<PaymentFailed/>} />
+       
         <Route path="/profile" element={<Profile/>} />
         <Route path="/logout" element={<Navigate to="/login" />} />
 
