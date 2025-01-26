@@ -15,7 +15,7 @@ import { SellerPage } from "./pages/SellerPage.jsx";
 import { useAuth } from "./context/useAuth.jsx";
 import { MangoDetailsCom } from "./components/MangoDetailsCom.jsx";
 import { CartPage } from "./pages/CartPage.jsx";
-import { Test } from "./pages/test.jsx";
+
 import PaymentFailed from "./pages/PaymentFailed.jsx";
 import { PaymentSucess } from "./pages/PaymentSucess.jsx";
 import { ContactPage } from "./pages/ContactPage.jsx";
@@ -67,7 +67,6 @@ function App() {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/unauthorized" element={<Unauthorized />} />
         <Route path="mango/:id" element={<MangoDetailsCom />} />      
-        <Route path="/test" element={<Test/>} />
         <Route path="/contact" element={<ContactPage/>} />
         
         
