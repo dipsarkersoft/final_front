@@ -4,12 +4,13 @@
   "version": "0.0.0",
   "type": "module",
  
-  "scripts": {
-  "start": "react-scripts start",
-  "build": "react-scripts build",
-  "test": "react-scripts test",
-  "eject": "react-scripts eject"
+ "scripts": {
+  "start": "vite",
+  "build": "vite build",
+  "test": "react-scripts test", 
+  "eject": "react-scripts eject" 
 }
+
 ,
   "dependencies": {
     "axios": "^1.7.9",
