@@ -1,4 +1,4 @@
-# Mango E-Commerce Platform 🍋🥭
+# Mango Selling E-Commerce Platform 🍋🥭
 
 ## Project Overview
 Mango E-Commerce is an online platform designed for selling mango products. It provides a seamless shopping experience for users while offering an admin dashboard for managing products and orders efficiently. The platform ensures secure role-based authentication and payment processing via **SSL Commerz**.
