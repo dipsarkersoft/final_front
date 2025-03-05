@@ -40,7 +40,7 @@ export const RegisterAPI = async (
 
 export const imageUpload= async(data)=>{
   
-  const IMAGEUPLAPIURL="https://api.imgbb.com/1/upload?key=6cd84806ff8cfdcea74fc868284dcb50"
+  const IMAGEUPLAPIURL="https://api.imgbb.com/1/upload?key=8f7e7c03722a62b2d54d0e1a8d1cb4b9"
 
     try {
       const res = await axios.post(IMAGEUPLAPIURL, data, {
