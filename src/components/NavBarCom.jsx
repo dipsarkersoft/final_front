@@ -16,16 +16,10 @@ export const NavBarCom = () => {
 
   return (
     <>
-
-
-
-
-
-
-<div className="container-fluid">
-      <nav className="navbar fixed-top  navbar-expand-lg navbar-light bg-light shadow-sm ">
       <div className="container-fluid">
-            <Link className="navbar-brand" to={'/'}>
+        <nav className="navbar fixed-top  navbar-expand-lg navbar-light bg-light shadow-sm ">
+          <div className="container-fluid">
+            <Link className="navbar-brand" to={"/"}>
               RAJSHAHIR AM
             </Link>
             <button
@@ -93,22 +87,32 @@ export const NavBarCom = () => {
                         data-bs-toggle="dropdown"
                         aria-expanded="false"
                       >
-                      Profile
+                        Profile
                       </button>
-                      <ul className="dropdown-menu">
-                         
-                      <li>
-                          <Link
-                           
-                           
-                            className="nav-link"
-                             to={"/profile"}
 
-                          >
-                            My Profile
-                          </Link>
+                      <ul className="dropdown-menu">
+                        <li>
+                          {account_type == "Seller" ? (
+                            <>
+                              <Link
+                                className="nav-link"
+                                to={"dashboard/seller/profile"}
+                              >
+                                My Profile
+                              </Link>
+                            </>
+                          ) : (
+                            <>
+                              <Link
+                                className="nav-link"
+                                to={"dashboard/profile"}
+                              >
+                                My Profile
+                              </Link>
+                            </>
+                          )}
                         </li>
-                        
+
                         <li>
                           <Link
                             to={"/logout"}
@@ -118,8 +122,6 @@ export const NavBarCom = () => {
                             Logout
                           </Link>{" "}
                         </li>
-
-
                       </ul>
                     </div>
                   </>
@@ -141,14 +143,14 @@ export const NavBarCom = () => {
               </ul>
             </div>
 
-            <div >
+            <div>
               <Link className="" to={"/cart"}>
                 <img className="navbar-cart pe-2" src={cartIcon} alt="" />
               </Link>
             </div>
           </div>
-      </nav>
-</div>
+        </nav>
+      </div>
     </>
   );
 };

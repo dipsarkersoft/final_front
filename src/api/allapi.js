@@ -97,6 +97,29 @@ export const authenticated_user = async (id, token) => {
   return data;
 };
 
+export const updateUserInf = async (token,body) => {
+  try {
+    // console.log(body)
+    const { data } = await axios.put(
+      `${URL}updateProfile/`,
+
+      body,
+      {
+        headers: {
+          Authorization: `Token ${token}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    return data;
+  }
+   catch (err) {
+
+    console.log(err);
+  }
+};
+
+
 export const allCategory = async () => {
   const { data } = await axios.get(`${URL}categories/all/`);
   return data;
@@ -109,12 +132,54 @@ export const getCategoryByid=async(id)=>{
 
 }
 
-export const allProducts = async (id) => {
-  const url = id ? `${URL}mango/all/?cat_id=${id}` : `${URL}mango/all/?cat_id=`;
-  const { data } = await axios.get(url);
-  return data;
+
+
+export const createCategory=async(token,body)=>{
+
+  try {
+    
+    const  data  = await axios.post(
+      `${URL}categories/create/`,
+
+      body,
+      {
+        headers: {
+          Authorization: `Token ${token}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    return data;
+  } 
   
+  catch (err) {
+    // console.log(err);
+  }
+
+
+}
+
+
+
+
+
+
+export const allProducts = async (catId="", searchQuery="") => {
+  const url = searchQuery
+    ? `${URL}mango/all/?cat_id=${catId}&search=${searchQuery}`
+    : `${URL}mango/all/?cat_id=${catId}`;
+  
+  try {
+    const { data } = await axios.get(url);
+    return data;
+  }
+   catch (error) {
+    console.error('Error fetching products:', error);
+    throw error; 
+  }
 };
+
+
 
 
 

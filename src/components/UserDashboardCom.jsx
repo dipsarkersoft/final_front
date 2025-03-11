@@ -16,14 +16,64 @@ export const UserDashboardCom = () => {
   const menuItems =
     user.account_type === "Seller"
       ? [
-          { key: "1", icon: <IoHomeOutline />, label: "Dashboard", to: "/dashboard/seller/" },
-          { key: "2", icon: <AiOutlineAppstoreAdd />, label: "Category", to: "/dashboard/seller/category-create" },
-          { key: "3", icon: <AiOutlineAppstoreAdd />, label: "Mango ", to: "/dashboard/seller/mango-create" },
-          { key: "5", icon: <IoHomeOutline />, label: "Mango List", to: "/dashboard/seller/mango-list" },
-          { key: "4", icon: <CiShoppingCart />, label: "Order List", to: "/dashboard/seller/order-list" },
+          { 
+            key: "1",
+             icon: <IoHomeOutline />,
+              label: "Dashboard",
+               to: "/dashboard/seller/"
+               },
+
+          { 
+            key: "2", 
+            icon: <AiOutlineAppstoreAdd />,
+             label: "Category", 
+             to: "/dashboard/seller/category-create" 
+          }, 
+
+          { 
+            key: "3",
+            icon: <CiShoppingCart />, 
+            label: "Category List",
+             to: "/dashboard/seller/category-list" },
+
+          { 
+            key: "4",
+             icon: <AiOutlineAppstoreAdd />,
+             label: "Mango ", 
+             to: "/dashboard/seller/mango-create" },
+
+          { 
+            key: "5", 
+            icon: <IoHomeOutline />, 
+            label: "Mango List", 
+            to: "/dashboard/seller/mango-list" },
+
+          { 
+            key: "6",
+             icon: <CiShoppingCart />,
+              label: "Order List",
+               to: "/dashboard/seller/order-list" },
+
+
+               { 
+                key: "7",
+                 icon: <CiShoppingCart />,
+                  label: "Profile",
+                   to: "/dashboard/seller/profile" },
+
+          
+          
         ]
       : [
-          { key: "6", icon: <CiShoppingCart />, label: "My Order", to: "/dashboard/my-order" },
+          { 
+            key: "8", 
+            icon: <CiShoppingCart />,
+             label: "My Order", to: "/dashboard/my-order" },
+             { 
+              key: "9",
+               icon: <CiShoppingCart />,
+                label: "Profile",
+                 to: "/dashboard/profile" },
          
         ];
 

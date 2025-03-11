@@ -85,7 +85,7 @@ export const HomePage = () => {
                <div className="col-lg-12 mb-5">                    
                         <div className="row g-4"> 
 
-                        {products?.slice(0, 3).map((product, index) => (
+                        {products?.slice(0, 4).map((product, index) => (
                   
                                   <div className="col-md-6 col-lg-6 col-xl-3">
                                        
@@ -102,12 +102,15 @@ export const HomePage = () => {
                                                
                                                 <div className="">
 
-                                                    <p className="text-dark 
+                                                    <p className="
+                                                    text-dark 
                                                     fs-6 fw-bold mb-0">BDT {product.price} / kg</p>
 
                                                     <Link  
                                                     to={`mango/${product.id}`}
-                                                    className="btn border border-secondary rounded-pill px-3 ">
+                                                    className="btn 
+                                                     my-2
+                                                      bg-primary text-white  px-3 ">
                                                         <AiOutlineShopping className="me-2 " />
                                                        Details
                                                         </Link>

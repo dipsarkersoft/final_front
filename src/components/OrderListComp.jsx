@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { allorderView, createReview, orderStatusUpdate } from "../api/allapi.js";
+import {
+  allorderView,
+  createReview,
+  orderStatusUpdate,
+} from "../api/allapi.js";
 import dateFormat from "dateformat";
 import { useAuth } from "../context/useAuth.jsx";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
+import { LoadingComponent } from "./ui/LoadingComponent.jsx";
 
 export const OrderListComp = () => {
   const { user } = useAuth();
@@ -15,15 +20,18 @@ export const OrderListComp = () => {
   const [currentOrder, setCurrentOrder] = useState(null);
   const [reviewText, setReviewText] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [loadingU, setLoadingU] = useState(false);
 
-
-   const[reviewORID,setReviewORID]=useState()
+  const [reviewORID, setReviewORID] = useState();
 
   const allorderapicall = async (token) => {
+    setLoading(true);
     const { data } = await allorderView(token);
-    // console.log(data)
-
-    setOrder(data);
+    if (data) {
+      setOrder(data);
+      setLoading(false);
+    }
   };
 
   const handleOrderUpdate = (order) => {
@@ -37,69 +45,61 @@ export const OrderListComp = () => {
   };
 
   const handleSubmitStatus = async () => {
-    const data = await orderStatusUpdate(currentOrder, token, selectedStatus);
-
-    if (data.status == "sucess") {
-      setShowModal(false);
-      toast.success(data.message);
-      allorderapicall(token);
+    try {
+      setLoadingU(true);
+      const data = await orderStatusUpdate(currentOrder, token, selectedStatus);
+      if (data?.status == "sucess") {
+        setShowModal(false);
+        toast.success(data?.message);
+        allorderapicall(token);
+        setLoadingU(false);
+      }
+    } catch (err) {
+      console.log(err);
+      setLoadingU(false);
     }
   };
-
-
-
 
   // review
   const openModal = (id) => {
-   setReviewORID(id)
-// console.log("order id", id)
+    setReviewORID(id);
+    // console.log("order id", id)
     setIsModalOpen(true);
   };
 
-  
   const closeModal = () => {
     setIsModalOpen(false);
-    setReviewText(""); 
+    setReviewText("");
   };
 
+  const handleSubmitReview = async () => {
+    // console.log(currentOrder)
 
-
-  const handleSubmitReview = async() => {
-
-
-  // console.log(currentOrder)
-    
     // console.log("Review Submitted:", reviewText);
-    if(!reviewText){
-    toast.error("Please write something")
-    return
-    
+    if (!reviewText) {
+      toast.error("Please write something");
+      return;
     }
- 
-    const body={
-      "body": reviewText,
-      "mango": reviewORID
-    }
+
+    const body = {
+      body: reviewText,
+      mango: reviewORID,
+    };
     // console.log(body)
 
-     const data=await createReview(token,body)
+    const data = await createReview(token, body);
     //  console.log(data)
-     if (data.status=="sucess"){
-     toast.success(data.message)
-     
-     }
-     else if(data.status=="alreview"){
-     toast.error(data.message)
-     }
-     else{
-     toast.error("Review Failed")
-     }
+    if (data?.status == "sucess") {
+      toast.success(data?.message);
+    } else if (data?.status == "alreview") {
+      toast.error(data?.message);
+    } else {
+      toast.error("Review Failed");
+    }
 
-
-    setReviewText(""); 
-    setIsModalOpen(false); 
+    setReviewText("");
+    setIsModalOpen(false);
   };
-
 
   useEffect(() => {
     allorderapicall(token);
@@ -111,81 +111,85 @@ export const OrderListComp = () => {
         <div className="container my-4">
           <h2 className="text-center mb-4">Order List</h2>
 
-          <div className="list-group">
-            {order.length === 0 ? (
-              <p className="text-center">No orders available.</p>
-            ) : (
-              order.map((order) => (
-                <div key={order.id} className="card mb-3">
-                  <div className="card-header d-flex justify-content-between align-items-center">
-                    <h5>Order #{order.id}</h5>
-                    <span
-                      className={`badge ${
-                        order.delivery_status === "Completed"
-                          ? "bg-success"
-                          : "bg-warning"
-                      }`}
-                    >
-                      {order.delivery_status}
-                    </span>
-                    {user.account_type === "Buyer" ? (
-                      <>
-                        {order.delivery_status === "Completed" && (
-                          <Link>
-                            <button
-                              type="button"
-                              className="btn btn-primary"
-                              
-                              onClick={() => openModal(order.mango)}
-
-                            >
-                              Review Now
-                            </button>
-                          </Link>
+          {loading ? (
+            <LoadingComponent />
+          ) : (
+            <>
+              <div className="list-group">
+                {order.length === 0 ? (
+                  <p className="text-center">No orders available.</p>
+                ) : (
+                  order.map((order) => (
+                    <div key={order.id} className="card mb-3">
+                      <div className="card-header d-flex justify-content-between align-items-center">
+                        <h5>Order #{order.id}</h5>
+                        <span
+                          className={`badge ${
+                            order.delivery_status === "Completed"
+                              ? "bg-success"
+                              : "bg-warning"
+                          }`}
+                        >
+                          {order.delivery_status}
+                        </span>
+                        {user.account_type === "Buyer" ? (
+                          <>
+                            {order.delivery_status === "Completed" && (
+                              <Link>
+                                <button
+                                  type="button"
+                                  className="btn btn-primary"
+                                  onClick={() => openModal(order.mango)}
+                                >
+                                  Review Now
+                                </button>
+                              </Link>
+                            )}
+                          </>
+                        ) : (
+                          <>
+                            {order.delivery_status !== "Completed" && (
+                              <button
+                                onClick={() => handleOrderUpdate(order)}
+                                className="btn btn-danger"
+                              >
+                                Update Now
+                              </button>
+                            )}
+                          </>
                         )}
-                      </>
-                    ) : (
-                      <>
-                        {order.delivery_status !== "Completed" && (
-                          <button
-                            onClick={() => handleOrderUpdate(order)}
-                            className="btn btn-danger"
-                          >
-                            Update Now
-                          </button>
-                        )}
-                      </>
-                    )}
-                  </div>
-                  <div className="card-body">
-                    <div className="row">
-                      <div className="col-md-6">
-                        <p>
-                          <strong>Mango ID :</strong> {order.mango}
-                        </p>
                       </div>
-                      <div className="col-md-6">
-                        <p>
-                          <strong>Quantity:</strong> {order.quantity}
-                        </p>
-                      </div>
-                      <div className="col-md-6">
-                        <p>
-                          <strong>User ID:</strong> {order.user}
-                        </p>
-                      </div>
-                      <div className="col-md-6">
-                        <p>
-                          <strong>Order Date:</strong>{" "}
-                          {dateFormat(order.order_date)}
-                        </p>
+                      <div className="card-body">
+                        <div className="row">
+                          <div className="col-md-6">
+                            <p>
+                              <strong>Mango ID :</strong> {order.mango}
+                            </p>
+                          </div>
+                          <div className="col-md-6">
+                            <p>
+                              <strong>Quantity:</strong> {order.quantity}
+                            </p>
+                          </div>
+                          <div className="col-md-6">
+                            <p>
+                              <strong>User ID:</strong> {order.user}
+                            </p>
+                          </div>
+                          <div className="col-md-6">
+                            <p>
+                              <strong>Order Date:</strong>{" "}
+                              {dateFormat(order.order_date)}
+                            </p>
+                          </div>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </div>
-              ))
-            )}
-          </div>
+                  ))
+                )}
+              </div>
+            </>
+          )}
         </div>
 
         {showModal && (
@@ -231,17 +235,26 @@ export const OrderListComp = () => {
                 <div className="modal-footer">
                   <button
                     type="button"
+                    disabled={loadingU}
                     className="btn btn-secondary"
                     onClick={() => setShowModal(false)}
                   >
                     Close
                   </button>
+
                   <button
-                    type="button"
-                    className="btn btn-primary"
+                    type="submit"
+                    className="btn btn-primary w-50"
+                    disabled={loadingU}
                     onClick={handleSubmitStatus}
                   >
-                    Update Status
+                    {loadingU ? (
+                      <>
+                        <span className="spinnerbtn"></span>
+                      </>
+                    ) : (
+                      "Update Status"
+                    )}
                   </button>
                 </div>
               </div>

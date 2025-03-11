@@ -2,19 +2,34 @@ import React, { useEffect, useState } from "react";
 import { allCategory, createProduct, imageUpload } from "../api/allapi.js";
 import toast from "react-hot-toast";
 import axios from "axios";
+import { LoadingComponent } from "./ui/LoadingComponent.jsx";
 
 export const ProductCreateCom = () => {
   const token = localStorage.getItem("token");
 
   const [category, setCategory] = useState([]);
   const [selcategory, setSelcategory] = useState();
+  const [loading, setLoading] = useState(false);
+  const [loadingca, setLoadingca] = useState(false);
 
   const loadCategory = async () => {
+    try{
+
+      setLoadingca(true)
     const data = await allCategory();
     if (data) {
       setCategory(data);
+      setLoadingca(false)
+
     }
-    // console.log(data);
+    }
+    catch(err){
+
+      setLoadingca(false)
+
+    }
+    
+   
   };
 
   const handleCategoryChange = (e) => {
@@ -41,34 +56,44 @@ export const ProductCreateCom = () => {
       return;
     }
 
+    try{
+
+      setLoading(true)
     const body = new FormData();
     body.append("image", image);
-
     const { data } = await imageUpload(body);
-
     const imgurl = data.data.url;
-
     const sendData={
-        "name": name,
-        "description":description, 
-        "price":price,
-        "quantity":quantity,
-        "image":imgurl,
-        "categories":selcategory
-    }
+      "name": name,
+      "description":description, 
+      "price":price,
+      "quantity":quantity,
+      "image":imgurl,
+      "categories":selcategory
+  }
+
+    
     const datares=await createProduct(token,sendData)
     // console.log(datares.status)
     if(datares.status){
       toast.success("Product Create Sucess")
+      setLoading(false)
       e.target.reset(); 
       setSelcategory("");
       
     }
+
+    }
+
+    catch(err){
+
+      setLoading(false)
+
+    }
+
+    
   
 
-    // console.log(quantity,price,description,name,imgurl,selcategory);
-
- 
 
   };
 
@@ -83,8 +108,12 @@ export const ProductCreateCom = () => {
         <div className="row bg-light justify-content-center">
           <div className="col-md-6">
             <h2 className="text-center mb-4">Create Product</h2>
+ {loadingca ? (
+        <LoadingComponent />
+      ) : (
+        <>
 
-            <form onSubmit={handleSubmit}>
+<form onSubmit={handleSubmit}>
               <div className="mb-3">
                 <label htmlFor="name" className="form-label">
                   Product Name
@@ -153,7 +182,7 @@ export const ProductCreateCom = () => {
 
                 <select
                   className="form-select"
-                  onChange={handleCategoryChange} // Call the handler
+                  onChange={handleCategoryChange} 
                 >
                   <option value="">All</option>
                   {category?.map((item, i) => (
@@ -165,11 +194,29 @@ export const ProductCreateCom = () => {
               </div>
 
               <div className="d-grid">
-                <button type="submit" className="btn btn-primary">
-                  Create Product
+                <button 
+                disabled={loading}
+                type="submit"
+                 className="btn btn-primary">
+                 
+
+                  {loading ? (
+                    <>
+                       Create
+                      <span className="spinnerbtn"></span>
+                    </>
+                  ) : (
+                    " Create "
+                  )}
                 </button>
               </div>
             </form>
+
+
+        </>
+      )}
+           
+
           </div>
         </div>
       </div>

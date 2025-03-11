@@ -26,28 +26,26 @@ export const AuthProvider = ({ children }) => {
 
       // toast.success("Login Sucess");
       return data;
-    } 
-    else {
+    } else {
       toast.error("Incorrect username or password");
     }
   };
 
-const getAuthUser = async () => {
+  const getAuthUser = async () => {
     const UserId = localStorage.getItem("user_id");
     const Token = localStorage.getItem("token");
 
     if (UserId && Token) {
       try {
-        setLoading(true)
+        setLoading(true);
         const { data } = await authenticated_user(UserId, Token);
-        
+
         setUser(data);
         setUserid(UserId);
         setToken(Token);
-      
+
         localStorage.setItem("user", JSON.stringify(data));
         return data;
-
       } catch (error) {
         setUser(null);
         setUserid(null);
@@ -58,6 +56,10 @@ const getAuthUser = async () => {
       setUserid(null);
       setToken(null);
     }
+  };
+
+  const setuserValue = (data) => {
+    setUser(data);
   };
 
   useEffect(() => {
@@ -84,7 +86,18 @@ const getAuthUser = async () => {
 
   return (
     <AuthContext.Provider
-      value={{ token, userid, user, role, logout, loginUser, loading, isAuth,getAuthUser }}
+      value={{
+        token,
+        userid,
+        user,
+        role,
+        setuserValue,
+        logout,
+        loginUser,
+        loading,
+        isAuth,
+        getAuthUser,
+      }}
     >
       {children}
     </AuthContext.Provider>
