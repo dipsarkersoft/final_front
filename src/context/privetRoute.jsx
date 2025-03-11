@@ -3,18 +3,12 @@ import { Navigate, Outlet } from 'react-router-dom';
 import { useAuth } from './useAuth.jsx';
 
 const PrivateRoute = ({ requiredAccountType }) => {
-  const { user,loading } = useAuth();
+  
+  const { user } = useAuth();
 
-
-if (loading) {
-  return <div>Loading...</div>;
-}
-
-  if (!user  ) {
-    
+  if (!user  ) {  
     return <Navigate to="/login" />;
   }
-
 
   if ( user.account_type !== requiredAccountType) {
     
@@ -23,6 +17,10 @@ if (loading) {
   else{
     return <Outlet />;
   }
+  
+
+
+
 
   
 };

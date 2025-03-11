@@ -15,67 +15,129 @@ import { SellerPage } from "./pages/SellerPage.jsx";
 import { useAuth } from "./context/useAuth.jsx";
 import { MangoDetailsCom } from "./components/MangoDetailsCom.jsx";
 import { CartPage } from "./pages/CartPage.jsx";
-
 import PaymentFailed from "./pages/PaymentFailed.jsx";
 import { PaymentSucess } from "./pages/PaymentSucess.jsx";
 import { ContactPage } from "./pages/ContactPage.jsx";
 import { Profile } from "./pages/Profile.jsx";
 
+//extranal
+import { LoadingComponent } from "./components/ui/LoadingComponent.jsx";
+import { PublicRoute } from "./context/PublicRoute.jsx";
+import { UserDashboardCom } from "./components/UserDashboardCom.jsx";
+import { OrderListComp } from "./components/OrderListComp.jsx";
+import { ProductCreateCom } from "./components/ProductCreateCom.jsx";
+import MangoListCom from "./components/MangoListCom.jsx";
+import { LoadingCom } from "./components/LoadingCom.jsx";
 
 function App() {
-  const { isAuth } = useAuth();
-
+  const { isAuth,user } = useAuth();
+ 
   return (
     <BrowserRouter>
       <Toaster />
       <NavBarCom />
 
-
       <Routes>
-        {isAuth? 
-        <>
-         <Route path="payment/sucess/:id" element={<PaymentSucess/>} />
-         <Route path="payment/failed" element={<PaymentFailed/>} />
-         <Route path="/profile" element={<Profile/>} />
-         <Route path="/logout" element={<Navigate to="/login" />} />
-        </>
-        :
-        <></>
-        }
+        {isAuth ? (
+          <>
+            <Route path="payment/sucess/:id" element={<PaymentSucess />} />
+            <Route path="payment/failed" element={<PaymentFailed />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/logout" element={<Navigate to="/login" />} />
+          </>
+        ) : (
+          <>
+           
+          </>
+        )}
 
-
-       
-        <Route path="/profile" element={<Profile/>} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="/logout" element={<Navigate to="/login" />} />
 
-        <Route element={<PrivateRoute requiredAccountType="Buyer" />}>
+        {/* <Route element={<PrivateRoute requiredAccountType="Buyer" />}>
           <Route path="/dashboard" element={<Dashboard />} />
         </Route>
 
         <Route element={<PrivateRoute requiredAccountType="Seller" />}>
           <Route path="/dashboard/Seller" element={<SellerPage />} />
+        </Route> */}
+
+
+
+        {/* <Route path="/dashboard/*" element={<UserDashboardCom />}>
+
+          <Route path="seller" />
+          <Route path="seller/order-list"  />
+          <Route path="seller/mango-create"  /> 
+          <Route path="seller/category-create"  /> 
+          <Route path="seller/product-list"  />
+          <Route path="seller/mango-list" />
+
+           <Route path="my-order"  />
+        
+        </Route> */}
+
+
+     <Route path="/dashboard" element={<UserDashboardCom />}>
+          {user.account_type === "Seller" ? (
+            <>
+               <Route element={<PrivateRoute requiredAccountType="Seller" />}>
+              <Route path="seller" element={<OrderListComp />} />
+              <Route path="seller/category-create" element={<ProductCreateCom />} />
+              <Route path="seller/mango-create" element={<ProductCreateCom />} />
+              <Route path="seller/order-list" element={<MangoListCom />} />
+              <Route path="seller/mango-list" element={<MangoListCom />} />
+
+              <Route path="*" element={<Navigate to="/dashboard/seller/" />} />
+ 
+              </Route>
+
+            </>
+          ) : (
+           
+           <>
+            <Route path="my-order" element={<OrderListComp />} />
+           
+            <Route path="*" element={<Navigate to="/dashboard/" />} />
+
+            </>
+
+          )}
         </Route>
 
+  
+        
+          
 
 
-        <Route path="/" element={<HomePage />} />
-        <Route path="/cart" element={<CartPage />} /> 
+        <Route path="/login" element={<LoginPage />} navigate={"/"} />
+        <Route path="/register" element={<RegisterPage />}  navigate={"/"}/>
+      
+       
+
+
+        <Route path="/cart" element={<CartPage />} />
         <Route path="/mango" element={<ShopPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
+       
+        
+
+        {/* <Route element={<PublicRoute />}>
+          <Route path="/login" element={<LoginPage />} />
+        </Route>
+
+        <Route element={<PublicRoute />}>
+          <Route path="/register" element={<RegisterPage />} />
+        </Route> */}
+        
+        
+      
         <Route path="/unauthorized" element={<Unauthorized />} />
-        <Route path="mango/:id" element={<MangoDetailsCom />} />      
-        <Route path="/contact" element={<ContactPage/>} />
-        
-        
-
-       
-
-
-       
-       
-
-
+        <Route path="mango/:id" element={<MangoDetailsCom />} />
+        <Route path="/contact" element={<ContactPage />} />
+        <Route path="*" element={<Navigate to="/login" />} />
+        <Route path="/" element={<HomePage />} />
+        {/* <Route path="/" element={<LoadingComponent />} /> */}
+        {/* <Route path="/" element={<LoadingCom />} /> */}
       </Routes>
     </BrowserRouter>
   );

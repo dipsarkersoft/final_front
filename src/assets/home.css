@@ -33,3 +33,13 @@
 .counter svg{
     color: #ffb524;
 }
+
+.buttonside{
+    margin-right: 25px;
+}
+
+.bgc{
+    background: #d8efe340;
+    padding: 25px;
+    border-radius: 5px;
+}

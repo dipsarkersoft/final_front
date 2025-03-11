@@ -14,20 +14,20 @@ export const Feataures = () => {
     <div className="container-fluid featurs py-5">
       <div className="container py-5">
         <div className="row g-4">
-          {/* Feature 1: Free Shipping */}
+         
           <div className="col-md-6 col-lg-3">
             <div className="featurs-item text-center rounded bg-light p-4">
               <div className="featurs-icon btn-square rounded-circle bg_features mb-5 mx-auto">
-                <FaCarSide size={48} className="text-white" /> {/* React Icon for Car */}
+                <FaCarSide size={48} className="text-white" /> 
               </div>
               <div className="featurs-content text-center">
                 <h5>Free Shipping</h5>
-                <p className="mb-0">Free on order over <strong>BDT 1000</strong></p>
+                <p className="mb-0">Free on order over <strong> 1000</strong></p>
               </div>
             </div>
           </div>
 
-          {/* Feature 2: Security Payment */}
+          
           <div className="col-md-6 col-lg-3">
             <div className="featurs-item text-center rounded bg-light p-4">
               <div className="featurs-icon btn-square rounded-circle  mb-5 mx-auto">
@@ -53,15 +53,15 @@ export const Feataures = () => {
             </div>
           </div>
 
-          {/* Feature 4: 24/7 Support */}
+         
           <div className="col-md-6 col-lg-3">
             <div className="featurs-item text-center rounded bg-light p-4">
               <div className="featurs-icon btn-square rounded-circle  mb-5 mx-auto">
-                <FaPhoneAlt size={48} className="text-white" /> {/* React Icon for Phone */}
+                <FaPhoneAlt size={48} className="text-white" /> 
               </div>
               <div className="featurs-content text-center">
                 <h5>24/7 Support</h5>
-                <p className="mb-0">Support anytime, fast response</p>
+                <p className="mb-0">Support every time fast</p>
               </div>
             </div>
           </div>

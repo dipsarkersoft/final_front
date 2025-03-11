@@ -22,8 +22,8 @@ export const NavBarCom = () => {
 
 
 
-<div className="container">
-      <nav className="navbar navbar-expand-lg navbar-light bg-light shadow-sm sticky-top">
+<div className="container-fluid">
+      <nav className="navbar fixed-top  navbar-expand-lg navbar-light bg-light shadow-sm ">
       <div className="container-fluid">
             <Link className="navbar-brand" to={'/'}>
               RAJSHAHIR AM
@@ -86,9 +86,9 @@ export const NavBarCom = () => {
                       )}
                     </li>
 
-                    <div className="btn-group">
+                    <div className="btn-group me-2">
                       <button
-                        className="btn btn-secondary btn-sm dropdown-toggle"
+                        className="btn buttonside btn-secondary btn-sm dropdown-toggle"
                         type="button"
                         data-bs-toggle="dropdown"
                         aria-expanded="false"

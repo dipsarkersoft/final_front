@@ -6,8 +6,8 @@ import hero2 from "../assets/images/hero2.jpg";
 export const HeroSection = () => {
   return (
    
-    <div className="container-fluid py-5 mb-5 hero-header">
-    <div className="container py-5">
+    <div className="container-fluid  hero-header py-5 mb-5 ">
+    <div className="py-5">
       <div className="row g-5 align-items-center">
         <div className="col-md-12 col-lg-7">
           <h4 className="mb-3 text-secondary">100% Organic Foods</h4>
@@ -52,7 +52,7 @@ export const HeroSection = () => {
                     transform: "translate(-50%, -50%)",
                     fontSize: "25px",
                     background:
-                      "linear-gradient(rgba(255, 181, 36, 0.7), rgba(255, 181, 36, 0.7))",
+                    "linear-gradient(rgba(223, 250, 206, 0.55), rgba(255, 182, 36, 0.15))",
                   }}
                 >
                   Fruits

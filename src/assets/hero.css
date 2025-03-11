@@ -41,11 +41,7 @@
   margin-left: 20px;
 }
 
-@media (min-width: 992px) {
-  .hero-header {
-    margin-top: 152px !important;
-  }
-}
+
 
 @media (max-width: 992px) {
   .hero-header {

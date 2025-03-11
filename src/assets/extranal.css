@@ -1,0 +1,313 @@
+/* #spinner {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .8s ease-out, visibility 0s linear .5s;
+    z-index: 99999;
+ }
+
+ #spinner.show {
+     transition: opacity .8s ease-out, visibility 0s linear .0s;
+     visibility: visible;
+     opacity: 1;
+ }
+
+ .back-to-top {
+    position: fixed;
+    right: 30px;
+    bottom: 30px;
+    display: flex;
+    width: 45px;
+    height: 45px;
+    align-items: center;
+    justify-content: center;
+    transition: 0.5s;
+    z-index: 99;
+} */
+
+.hero-header {
+  background: linear-gradient(
+      rgba(248, 223, 173, 0.1),
+      rgba(248, 223, 173, 0.1)
+    ),
+    url(./images/herobg.jpg);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.carousel-item {
+  position: relative;
+}
+
+.carousel-item a {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 25px;
+  background: linear-gradient(rgba(255, 181, 36, 0.7), rgba(255, 181, 36, 0.7));
+}
+
+.carousel-control-next,
+.carousel-control-prev {
+  width: 48px;
+  height: 48px;
+  border-radius: 48px;
+  border: 1px solid var(--bs-white);
+  background: var(--bs-primary);
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.carousel-control-next {
+  margin-right: 20px;
+}
+
+.carousel-control-prev {
+  margin-left: 20px;
+}
+
+.page-header {
+  position: relative;
+  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+    url(../img/cart-page-header-img.jpg);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.fruite .fruite-item:hover {
+  box-shadow: 0 0 55px rgba(0, 0, 0, 0.4);
+}
+
+.fruite .fruite-item .fruite-img {
+  overflow: hidden;
+  transition: 0.5s;
+  border-radius: 10px 10px 0 0;
+}
+
+.fruite .fruite-item .fruite-img img {
+  transition: 0.5s;
+}
+
+.fruite .fruite-item .fruite-img img:hover {
+  transform: scale(1.3);
+}
+
+.product-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 20px;
+}
+
+.skeleton {
+  background: #e0e0e0;
+  border-radius: 5px;
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+.skeleton-img {
+  width: 150px;
+  height: 150px;
+}
+
+.skeleton-text {
+  width: 80%;
+  height: 20px;
+}
+
+.skeleton-text.short {
+  width: 50%;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.featurs .featurs-item .featurs-icon {
+  position: relative;
+  width: 120px;
+  height: 120px;
+}
+
+.featurs .featurs-item .featurs-icon::after {
+  content: "";
+  width: 35px;
+  height: 35px;
+  background: var(--bs-secondary);
+  position: absolute;
+  bottom: -10px;
+  transform: translate(-50%);
+  transform: rotate(45deg);
+  background: var(--bs-secondary);
+}
+
+.service .service-item .service-content {
+  position: relative;
+  width: 250px;
+  height: 130px;
+  top: -50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.banner .banner-btn:hover {
+  background: var(--bs-primary);
+}
+
+/* Make the slider more visually appealing */
+.custom-slide {
+  height: 500px; /* Adjust height as needed */
+  object-fit: cover; /* Ensure image covers the slide */
+  filter: brightness(90%); /* Slight dark overlay for readability */
+  transition: transform 0.8s ease-in-out;
+}
+
+/* Zoom-in effect on slide change */
+.carousel-item.active .custom-slide {
+  transform: scale(1.05);
+}
+
+/* Custom caption styling */
+.custom-caption {
+  background: rgba(0, 0, 0, 0.5); /* Dark overlay */
+  padding: 15px;
+  border-radius: 10px;
+  animation: fadeInUp 1s ease-in-out;
+}
+
+.custom-caption h3 {
+  color: #97ff38;
+}
+
+/* Fade-in effect for captions */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Custom navigation buttons */
+.carousel-control-prev,
+.carousel-control-next {
+  width: 50px;
+  height: 50px;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  width: 100%;
+  height: 100%;
+}
+
+
+
+
+/* Full-screen Overlay */
+.LoadingOverlay {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgba(255, 255, 255, 0.2);
+    z-index: 500000 !important;
+}
+
+/* Progress Bar Container */
+.Line-Progress {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+/* Animated Indeterminate Progress */
+.Line-Progress .indeterminate {
+    position: relative;
+    width: 100%;
+    height: 4px;
+    background-color: rgba(203, 12, 159, 0.2); /* Light background */
+    overflow: hidden;
+}
+
+/* Moving bar */
+.Line-Progress .indeterminate:before {
+    content: "";
+    position: absolute;
+    background-color: #cb0c9f;
+    height: 4px;
+    width: 30%;
+    left: -30%;
+    animation: infiniteSlide 1.5s linear infinite;
+}
+
+/* Continuous sliding animation */
+@keyframes infiniteSlide {
+    0% { left: -30%; }
+    100% { left: 100%; }
+}
+
+
+ .ant-menu-light{
+    background-color: rgb(255, 255, 255) !important;
+}
+
+.ant-menu-item{
+    font-size: 20px !important;
+}
+.ant-menu-item-icon{
+    font-size: 20px !important;
+}
+
+
+.footer .footer-item .btn-link {
+  line-height: 35px;
+  color: rgba(255, 255, 255, .5);
+  transition: 0.5s;
+}
+
+.footer .footer-item .btn-link:hover {
+  color: var(--bs-secondary) !important;
+}
+
+.footer .footer-item p.mb-4 {
+  line-height: 35px;
+}
+.ftrimg{
+  margin-right: 30px;
+}
+
+
+@media (max-width: 552px) {
+
+  .footerall{
+    display: contents !important
+  }
+  .footerchild{
+    display: block;
+  }
+
+  
+} 

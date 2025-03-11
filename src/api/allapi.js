@@ -1,7 +1,9 @@
 import axios from "axios";
 import { useAuth } from "../context/useAuth.jsx";
 
-export const URL = "https://mangosellingbackend.onrender.com/";
+//  export const URL = "https://mangosellingbackend.onrender.com/";
+ export const URL = "http://127.0.0.1:8000/";
+
 
 export const RegisterAPI = async (
   username,
@@ -111,7 +113,26 @@ export const allProducts = async (id) => {
   const url = id ? `${URL}mango/all/?cat_id=${id}` : `${URL}mango/all/?cat_id=`;
   const { data } = await axios.get(url);
   return data;
+  
 };
+
+
+
+// export const allProducts = async (id, page = 1) => {
+  
+//   const url = id
+//     ? `${URL}mango/all/?cat_id=${id}&page=${page}`
+//     : `${URL}mango/all/?cat_id=&page=${page}`;
+
+//   const  {data}  = await axios.get(url);
+
+//   // console.log(data.results.data)
+//   return data?.results?.data;
+
+// };
+
+
+
 export const mangoDetailsAPI = async (id) => {
   const { data } = await axios.get(`${URL}mango/${id}/`);
   return data;
