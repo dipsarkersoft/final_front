@@ -42,7 +42,7 @@ function App() {
           <>
             <Route path="payment/sucess/:id" element={<PaymentSucess />} />
             <Route path="payment/failed" element={<PaymentFailed />} />
-            <Route path="/profile" element={<Profile />} />
+            <Route path="dashboard/profile" element={<Profile />} />
             <Route path="/logout" element={<Navigate to="/login" />} />
           </>
         ) : (
@@ -51,31 +51,11 @@ function App() {
           </>
         )}
 
-        <Route path="/profile" element={<Profile />} />
+        
         <Route path="/logout" element={<Navigate to="/login" />} />
 
-        {/* <Route element={<PrivateRoute requiredAccountType="Buyer" />}>
-          <Route path="/dashboard" element={<Dashboard />} />
-        </Route>
+      
 
-        <Route element={<PrivateRoute requiredAccountType="Seller" />}>
-          <Route path="/dashboard/Seller" element={<SellerPage />} />
-        </Route> */}
-
-
-
-        {/* <Route path="/dashboard/*" element={<UserDashboardCom />}>
-
-          <Route path="seller" />
-          <Route path="seller/order-list"  />
-          <Route path="seller/mango-create"  /> 
-          <Route path="seller/category-create"  /> 
-          <Route path="seller/product-list"  />
-          <Route path="seller/mango-list" />
-
-           <Route path="my-order"  />
-        
-        </Route> */}
 
 
      <Route path="/dashboard" element={<UserDashboardCom />}>
@@ -87,7 +67,7 @@ function App() {
               <Route path="seller/mango-create" element={<ProductCreateCom />} />
               <Route path="seller/order-list" element={<MangoListCom />} />
               <Route path="seller/mango-list" element={<MangoListCom />} />
-
+              <Route path="profile/" element={<Profile />} />
               <Route path="*" element={<Navigate to="/dashboard/seller/" />} />
  
               </Route>
@@ -96,9 +76,14 @@ function App() {
           ) : (
            
            <>
-            <Route path="my-order" element={<OrderListComp />} />
            
-            <Route path="*" element={<Navigate to="/dashboard/" />} />
+           
+           <Route element={<PrivateRoute requiredAccountType="Buyer" />}>
+            <Route path="my-order" element={<OrderListComp />} /> 
+            <Route path="*" element={<Navigate to="/" />} />
+            <Route path="profile/" element={<Profile />} />
+
+            </Route>
 
             </>
 
@@ -110,8 +95,8 @@ function App() {
           
 
 
-        <Route path="/login" element={<LoginPage />} navigate={"/"} />
-        <Route path="/register" element={<RegisterPage />}  navigate={"/"}/>
+        {/* <Route path="/login" element={<LoginPage />} navigate={"/"} />
+        <Route path="/register" element={<RegisterPage />}  navigate={"/"}/> */}
       
        
 
@@ -121,16 +106,18 @@ function App() {
        
         
 
-        {/* <Route element={<PublicRoute />}>
-          <Route path="/login" element={<LoginPage />} />
+        <Route element={<PublicRoute />}>
+         
+            <Route path="/login" element={<LoginPage />} />
+
         </Route>
 
         <Route element={<PublicRoute />}>
           <Route path="/register" element={<RegisterPage />} />
-        </Route> */}
+        </Route>
         
         
-      
+       
         <Route path="/unauthorized" element={<Unauthorized />} />
         <Route path="mango/:id" element={<MangoDetailsCom />} />
         <Route path="/contact" element={<ContactPage />} />

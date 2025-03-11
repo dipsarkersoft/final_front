@@ -45,7 +45,7 @@ export const RegisterPage = () => {
   };
 
   return (
-    <div className="container mt-5">
+    <div className="container ShopContainer">
       <div className="row justify-content-center">
         <div className="col-md-6">
           <div className="card shadow">
@@ -71,7 +71,7 @@ export const RegisterPage = () => {
 
                 <div className="mb-3 d-flex gap-2 ">
 
-                  <div>
+                  <div className="col-md-6" >
                     <label className="form-label">First Name</label>
                     <input
                       type="text"
@@ -84,7 +84,8 @@ export const RegisterPage = () => {
                     />
                   </div>
 
-                  <div>
+                  <div className="col-md-6">
+
                     <label className="form-label">Last Name</label>
                     <input
                       type="text"
@@ -97,9 +98,11 @@ export const RegisterPage = () => {
 
                     />
                   </div>
-                </div>
 
-                <div className="mb-3">
+                </div>
+                <div className="  d-flex gap-2 ">
+
+                <div className="col-md-6 mb-3">
                   <label htmlFor="email" className="form-label">
                     Email Address
                   </label>
@@ -113,7 +116,7 @@ export const RegisterPage = () => {
                     onChange={(e) => setEmail(e.target.value)}
                   />
                 </div>
-                <div className="mb-3">
+                <div className="col-md-6 mb-3">
                   <label htmlFor="email" className="form-label">
                     Mobile Number
                   </label>
@@ -127,7 +130,13 @@ export const RegisterPage = () => {
                     onChange={(e) => setMobile(e.target.value)}
                   />
                 </div>
-                <div className="mb-3">
+
+                </div>
+
+               
+<div className=" mb-3 d-flex gap-2 ">
+  
+<div className=" col-md-6">
                   <label className="form-label">
                     Password
                   </label>
@@ -141,7 +150,7 @@ export const RegisterPage = () => {
                     onChange={(e) => setPassword(e.target.value)}
                   />
                 </div>
-                <div className="mb-3">
+                <div className="col-md-6">
                   <label  className="form-label">
                     Confirm Password
                   </label>
@@ -154,6 +163,9 @@ export const RegisterPage = () => {
                     onChange={(e) => setConfirmPassword(e.target.value)}
                   />
                 </div>
+
+</div>
+
                 <button onClick={handleRegister} type="submit" className="btn btn-primary w-100">
                   Register
                 </button>

@@ -148,7 +148,7 @@ export const NavBarCom = () => {
             </div>
           </div>
       </nav>
-    </div>
+</div>
     </>
   );
 };

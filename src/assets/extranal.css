@@ -221,53 +221,7 @@
 
 
 
-/* Full-screen Overlay */
-.LoadingOverlay {
-    position: fixed;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    width: 100%;
-    top: 0;
-    left: 0;
-    background-color: rgba(255, 255, 255, 0.2);
-    z-index: 500000 !important;
-}
 
-/* Progress Bar Container */
-.Line-Progress {
-    width: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-}
-
-/* Animated Indeterminate Progress */
-.Line-Progress .indeterminate {
-    position: relative;
-    width: 100%;
-    height: 4px;
-    background-color: rgba(203, 12, 159, 0.2); /* Light background */
-    overflow: hidden;
-}
-
-/* Moving bar */
-.Line-Progress .indeterminate:before {
-    content: "";
-    position: absolute;
-    background-color: #cb0c9f;
-    height: 4px;
-    width: 30%;
-    left: -30%;
-    animation: infiniteSlide 1.5s linear infinite;
-}
-
-/* Continuous sliding animation */
-@keyframes infiniteSlide {
-    0% { left: -30%; }
-    100% { left: 100%; }
-}
 
 
  .ant-menu-light{
@@ -311,3 +265,4 @@
 
   
 } 
+

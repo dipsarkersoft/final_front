@@ -13,6 +13,7 @@ export const LoadingComponent = () => {
           <span className="visually-hidden">Loading...</span>
         </div>
       </div>
+    
     </div>
   );
 };

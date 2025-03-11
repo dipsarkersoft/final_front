@@ -48,7 +48,7 @@ export const ShopPage = () => {
 
   return (
     <div>
-      <div className="container my-4">
+      <div className="container-fluid ShopContainer">
         <div className="row ">
           {loading ? (
             <LoadingComponent />

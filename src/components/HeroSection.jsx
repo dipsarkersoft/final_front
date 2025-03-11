@@ -6,7 +6,7 @@ import hero2 from "../assets/images/hero2.jpg";
 export const HeroSection = () => {
   return (
    
-    <div className="container-fluid  hero-header py-5 mb-5 ">
+    <div className="container-fluid  hero-header mt-5 py-5 mb-5 ">
     <div className="py-5">
       <div className="row g-5 align-items-center">
         <div className="col-md-12 col-lg-7">

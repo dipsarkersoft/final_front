@@ -64,6 +64,8 @@
   align-items: center;
   height: 100vh;
   background-color: #f4f4f4;
+  z-index: 500000 !important;
+  
 }
 
 /* Spinner animation */
@@ -87,3 +89,7 @@
 }
 
 
+
+.ShopContainer{
+  margin-top: 100px;
+}

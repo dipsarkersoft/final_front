@@ -107,7 +107,7 @@ export const CartPage = () => {
   return (
     <>
       <section
-        className="cart-page"
+        className="cart-page ShopContainer"
         style={{ backgroundColor: "#f8f9fa", padding: "20px" }}
       >
         <div className="container">
