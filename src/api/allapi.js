@@ -1,8 +1,8 @@
 import axios from "axios";
 import { useAuth } from "../context/useAuth.jsx";
 
-//  export const URL = "https://mangosellingbackend.onrender.com/";
- export const URL = "http://127.0.0.1:8000/";
+export const URL = "https://mangosellingbackend.onrender.com/";
+//  export const URL = "http://127.0.0.1:8000/";
 
 
 export const RegisterAPI = async (
