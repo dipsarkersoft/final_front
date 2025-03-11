@@ -113,63 +113,93 @@ function App() {
           </>
         )} */}
 
-{user && token && user?.account_type ? (
-        <>
-          <Route path="payment/success/:id" element={<PaymentSucess />} />
-          <Route path="payment/failed" element={<PaymentFailed />} />
-          <Route path="/logout" element={<Navigate to="/login" />} />
-          
+        {user && token && user?.account_type ? (
+          <>
+            <Route path="/logout" element={<Navigate to="/login" />} />
 
-          {user?.account_type === "Seller" ? <>
-          
-            <Route path="/register" element={<Navigate to="/dashboard/seller/" />} />
-            <Route path="/login" element={<Navigate to="/dashboard/seller"/>} />
-
-          </> : <>
-          
-          <Route path="/register" element={<Navigate to="/dashboard" />} />
-          <Route path="/login" element={<Navigate to="/dashboard" />} />
-          
-          </>
-
-          }
-    
-          
-          <Route path="/dashboard" element={<UserDashboardCom />}>
-       
-            
-            
-            
             {user?.account_type === "Seller" ? (
               <>
-                <Route element={<PrivateRoute requiredAccountType="Seller" />}>
-                  <Route path="seller" element={<AdminOverview />} />
-                  <Route path="seller/profile" element={<Profile />} />
-                  <Route path="seller/category-create" element={<CategoryCom />} />
-                  <Route path="seller/category-list" element={<CategoryListCom />} />
-                  <Route path="seller/mango-create" element={<ProductCreateCom />} />
-                  <Route path="seller/mango-list" element={<MangoListCom />} />
-                  <Route path="seller/order-list" element={<OrderListComp />} />
-                  <Route path="*" element={<Navigate to="/dashboard/seller/" />} />
-                </Route>
+                <Route
+                  path="/register"
+                  element={<Navigate to="/dashboard/seller/" />}
+                />
+                <Route
+                  path="/login"
+                  element={<Navigate to="/dashboard/seller" />}
+                />
               </>
             ) : (
               <>
-                <Route element={<PrivateRoute requiredAccountType="Buyer" />}>
-                  <Route path="my-order" element={<OrderListComp />} />
-                  <Route path="*" element={<Navigate to="/" />} />
-                  <Route path="profile" element={<Profile />} />
-                </Route>
+                <Route
+                  path="/register"
+                  element={<Navigate to="/dashboard" />}
+                />
+                <Route path="/login" element={<Navigate to="/dashboard" />} />
               </>
             )}
-          </Route>
-        </>
-      ) : (
-        <></>
-      )}
 
-     
+            
+            <Route path="/dashboard" element={<UserDashboardCom />}>
+              {user?.account_type === "Seller" ? (
+                <>
+                  <Route
+                    element={<PrivateRoute requiredAccountType="Seller" />}
+                  >
+                    <Route path="seller" element={<AdminOverview />} />
+                    <Route path="seller/profile" element={<Profile />} />
+                    <Route
+                      path="seller/category-create"
+                      element={<CategoryCom />}
+                    />
+                    <Route
+                      path="seller/category-list"
+                      element={<CategoryListCom />}
+                    />
+                    <Route
+                      path="seller/mango-create"
+                      element={<ProductCreateCom />}
+                    />
+                    <Route
+                      path="seller/mango-list"
+                      element={<MangoListCom />}
+                    />
+                    <Route
+                      path="seller/order-list"
+                      element={<OrderListComp />}
+                    />
+                    <Route
+                      path="*"
+                      element={<Navigate to="/dashboard/seller/" />}
+                    />
 
+                    {/* <Route path="payment/success/:id" element={<PaymentSucess />} />
+                  <Route path="payment/failed" element={<PaymentFailed />} /> */}
+                  </Route>
+                </>
+              ) : (
+                <>
+                  <Route element={<PrivateRoute requiredAccountType="Buyer" />}>
+                  <Route path="" element={<OrderListComp />} />
+                    <Route path="my-order" element={<OrderListComp />} />
+                    <Route path="*" element={<Navigate to="/" />} />
+                    <Route path="profile" element={<Profile />} />
+                    
+                  </Route>
+                </>
+              )}
+            </Route>
+
+          </>
+        ) : (
+          <></>
+        )}
+
+{user && token && (
+  <>
+  <Route path="payment/success/:id" element={<PaymentSucess />} />
+  <Route path="payment/failed" element={<PaymentFailed />} />
+  </>
+)}
 
 
 
@@ -219,7 +249,8 @@ function App() {
 
         <Route path="/login" element={<LoginPage />} navigate={"/"} />
         <Route path="/register" element={<RegisterPage />} navigate={"/"} />
-
+        
+        
         <Route path="/cart" element={<CartPage />} />
         <Route path="/mango" element={<ShopPage />} />
         <Route path="/unauthorized" element={<Unauthorized />} />

@@ -6,9 +6,9 @@ import toast from "react-hot-toast";
 import { useAuth } from "../context/useAuth.jsx";
 import { Link } from "react-router-dom";
 
-
 export const CartPage = () => {
   const token = localStorage.getItem("token");
+  const [loading, setLoading] = useState(false);
 
   const [cart, setCart] = useState([]);
   const { isAuth } = useAuth();
@@ -63,37 +63,52 @@ export const CartPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { address, deliveryPostCode, deliveryPhone } = formData;
 
-    if (!deliveryPhone || !deliveryPostCode || !address) {
-      toast.error("Please fill in all the fields.");
-      return;
+    try {
+      const { address, deliveryPostCode, deliveryPhone } = formData;
+
+      if (!deliveryPhone || !deliveryPostCode || !address) {
+        toast.error("Please fill in all the fields.");
+        return;
+      }
+      if (isNaN(deliveryPhone)) {
+        toast.error(" Phone IS A number fields ");
+        return;
+      }
+      if (isNaN(deliveryPostCode)) {
+        toast.error(" PostCode IS A number fields ");
+        return;
+      }
+
+      const body = {
+        address: address,
+        deliveryPhone: deliveryPhone,
+        totalammount: calculateTotal(),
+      };
+
+      // console.log(address,deliveryPostCode,deliveryPhone);
+      setLoading(true);
+      const data = await paymentAPI(token, body);
+
+      if (data?.data?.GatewayPageURL) {
+        setLoading(false);
+      }
+
+      window.location.replace(data?.data?.GatewayPageURL);
+      // console.log(data.transId)
+
+      localStorage.setItem("transId", JSON.stringify(data?.transId));
+      localStorage.setItem("address", JSON.stringify(address));
+      localStorage.setItem("deliveryPhone", JSON.stringify(deliveryPhone));
+      localStorage.setItem("totalammount", JSON.stringify(calculateTotal()));
+      localStorage.setItem(
+        "deliveryPostCode",
+        JSON.stringify(deliveryPostCode)
+      );
+    } catch (err) {
+      console.log(err);
+      setLoading(false);
     }
-    if (isNaN(deliveryPhone)) {
-      toast.error(" Phone IS A number fields ");
-      return;
-    }
-    if (isNaN(deliveryPostCode)) {
-      toast.error(" PostCode IS A number fields ");
-      return;
-    }
-
-    const body = {
-      address: address,
-      deliveryPhone: deliveryPhone,
-      totalammount: calculateTotal(),
-    };
-
-    // console.log(address,deliveryPostCode,deliveryPhone);
-    const data = await paymentAPI(token, body);
-    window.location.replace(data.data.GatewayPageURL);
-    // console.log(data.transId)
-
-    localStorage.setItem("transId", JSON.stringify(data.transId));
-    localStorage.setItem("address", JSON.stringify(address));
-    localStorage.setItem("deliveryPhone", JSON.stringify(deliveryPhone));
-    localStorage.setItem("totalammount", JSON.stringify(calculateTotal()));
-    localStorage.setItem("deliveryPostCode", JSON.stringify(deliveryPostCode));
 
     // cheakout(address,deliveryPostCode,deliveryPhone);
   };
@@ -238,10 +253,21 @@ export const CartPage = () => {
                           {isAuth ? (
                             <>
                               <button
+                              disabled={loading}
                                 type="submit"
                                 className="btn btn-primary w-100 mt-3"
                               >
-                                Proceed to Checkout
+                                {loading ? (
+                                  <>
+                                    Proceed to Checkout
+                                    <span className="spinnerbtn">
+
+                                    </span>
+                                  </>
+                                ) : (
+                                  "Proceed to Checkout"
+                                )}
+                               
                               </button>
                             </>
                           ) : (
