@@ -48,7 +48,7 @@ export const CategoryListCom = () => {
               <th>Id</th>
               <th>Name</th>
               <th>Slug</th>
-              <th >Action</th>
+              {/* <th >Action</th> */}
             </tr>
           </thead>
           <tbody>
@@ -59,10 +59,10 @@ export const CategoryListCom = () => {
                   <td>{iteam.name}</td>
                   <td>{iteam.slug}</td>
 
-                  <td className="d-flex justify-content-center align-items-center gap-2">
+                  {/* <td className="d-flex justify-content-center align-items-center gap-2">
                     <button className="btn btn-success">Edit</button>
                     <button className="btn btn-danger">Del</button>
-                  </td>
+                  </td> */}
                 </tr>
               </>
             ))}

@@ -40,7 +40,7 @@ export const MangoListCom = () => {
                 <th>Price</th>
                 <th>Quantity</th>
                 <th>Image</th>
-                <th>Action</th>
+                {/* <th>Action</th> */}
               </tr>
             </thead>
             <tbody>
@@ -66,11 +66,11 @@ export const MangoListCom = () => {
                         "No Image"
                       )}
                     </td>
-
+{/* 
                     <td className="d-flex gap-2 ">
                       <button className="btn btn-success">Edit</button>
                       <button className="btn btn-danger">Del</button>
-                    </td>
+                    </td> */}
                   </tr>
                 </>
               ))}
