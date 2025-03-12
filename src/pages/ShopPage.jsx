@@ -103,8 +103,8 @@ export const ShopPage = () => {
 
               <div className="col-md-12">
                 <div className="row">
-                  <div className="col-md-2"></div>
-                  {products?.length == 0 ? (
+                 
+                  {!loading && products?.length == 0 ? (
                     <>
                       <p className="text-center text-danger ">
                         No Product Found
@@ -120,7 +120,7 @@ export const ShopPage = () => {
                         <>
                           {products?.map((product, index) => (
                             <>
-                              <div key={index} className="col-md-3 mb-4">
+                              <div key={index} className="col-md-3 my-3">
                                 <div className="border rounded position-relative vesitable-item">
                                   <div className="vesitable-img">
                                     <img
